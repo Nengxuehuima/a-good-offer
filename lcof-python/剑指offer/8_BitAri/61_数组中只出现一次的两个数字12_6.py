@@ -6,7 +6,8 @@ class Solution:
         for i in nums:
             sum ^= i
         k = 1
-        # 找到第一位不一样的数 分组
+        # 找到第一位不一样的数 分组 入股第一位就不同 直接结束了
+        # 0011(3) ^ 0100(4) = 0111 然后发现第一位就不同g
         while k & sum == 0:
             k <<= 1
         for i in nums:
