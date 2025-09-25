@@ -1,42 +1,27 @@
-class Solution
-{
-public:
-    ListNode *FindFirstCommonNode(ListNode *pHead1, ListNode *pHead2)
-    {
-        ListNode *head1 = pHead1;
-        ListNode *head2 = pHead2;
-        // 两个指针，同样的速度，走完同样长度 不管两条链表有无相同节点
-        while (head1 != head2)
-        {
-            head1 = (head1 == nullptr) ? pHead2 : head1->next;
-            head2 = (head2 == nullptr) ? pHead1 : head2->next;
-        }
-        return head1;
+/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+            val(x), next(NULL) {
     }
-};
-
-#include <set>
+};*/
 class Solution
 {
 public:
     ListNode *FindFirstCommonNode(ListNode *pHead1, ListNode *pHead2)
     {
-        if (pHead1 == nullptr || pHead2 == nullptr)
+        if (!pHead1)
             return nullptr;
-        set<ListNode *> s;
-        while (pHead1)
+        if (!pHead2)
+            return nullptr;
+        ListNode *M = pHead1;
+        ListNode *N = pHead2;
+        while (M != N)
         {
-            s.insert(pHead1);
-            pHead1 = pHead1->next;
+            M = M ? M->next : pHead2; // 如果M为空才重置，否则正常移动
+            N = N ? N->next : pHead1; // 如果N为空才重置，否则正常移动
         }
-        while (pHead2)
-        {
-            if (s.find(pHead2) != s.end())
-                return pHead2;
-            pHead2 = pHead2->next;
-        }
-        return nullptr;
+        return M;
     }
 };
-
-// 第二种

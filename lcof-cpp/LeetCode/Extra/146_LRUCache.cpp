@@ -63,10 +63,10 @@ public:
         {
             // 满了 删除尾巴
             myListNode *toRemove = tail->prev;
-            mp.erase(toRemove->key);
-            deleteListNode(toRemove);
+            mp.erase(toRemove->key);  // 移出map
+            deleteListNode(toRemove); // 断开连接
             // 此时tail->prev变了
-            delete toRemove;
+            delete toRemove; // 实际删除内存都在put里面
             --size;
         }
         insertListNode(node);
@@ -77,6 +77,7 @@ public:
 
     void insertListNode(myListNode *node)
     {
+        // 插入一定是在头结点插入
         if (!node)
             return;
         node->prev = head;

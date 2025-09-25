@@ -5,6 +5,7 @@
  *	ListNode(int x) : val(x), next(nullptr) {}
  * };
  */
+#include <memory>
 class Solution
 {
 public:
@@ -19,24 +20,23 @@ public:
      */
     ListNode *reverseBetween(ListNode *head, int m, int n)
     {
-        // 虚拟头部
+        if (!head)
+            return nullptr;
         auto dummyHead = new ListNode(-1);
         dummyHead->next = head;
-        auto pre = dummyHead;
-        for (int i = 0; i < m - 1; i++)
+        auto pre = dummyHead; // 记录要更改区间的前一个节点
+        for (int i = 0; i < m - 1; ++i)
             pre = pre->next;
-        // 本质上只有3个变量3次动作， 并且中间反转后就已经有序了
-        ListNode *cur = pre->next;
+        // 类似插入排序 将第一个一次一次 反转到最后， 但是要把最后的向前反转 所以每一次反转都要把cur_next节点向最开始的位置反转
+        auto cur = pre->next; // 要反转到最后的节点
         ListNode *cur_next = nullptr;
-        // n-m差多少 就需要交换 n-m次 1 2 <--1次--> 3 <--1次--> 4 5
-        // cur 永远是要修改的那个 也就是最后一个
-        for (int i = 0; i < n - m; i++)
+        for (int i = 0; i < n - m; ++i)
         {
-            // cur->next记住了 所以下一个修改cur->next
+            // 更新cur_next结点
             cur_next = cur->next;
-            cur->next = cur_next->next;
-            cur_next->next = pre->next; // 类似于插队 插队插到前面去 因为cur永远是cur_next前一个 但不是pre->next,pre是不变的
-            pre->next = cur_next;       // 更新 新的插队人员
+            cur->next = cur_next->next; // 将cur->next连接指向下一个节点
+            cur_next->next = pre->next; // 反转到第一个结点 类似LRUcache的moveToFront
+            pre->next = cur_next;
         }
         return dummyHead->next;
     }

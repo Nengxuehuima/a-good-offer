@@ -1,8 +1,8 @@
 /**
  * struct ListNode {
- *  int val;
- *  struct ListNode *next;
- *  ListNode(int x) : val(x), next(nullptr) {}
+ *	int val;
+ *	struct ListNode *next;
+ *	ListNode(int x) : val(x), next(nullptr) {}
  * };
  */
 class Solution
@@ -23,31 +23,27 @@ public:
             return pHead2;
         if (pHead2 == nullptr)
             return pHead1;
-
         // 归并排序
         auto head = new ListNode(-1);
         ListNode *cur = head;
         while (pHead1 != nullptr && pHead2 != nullptr)
         {
-            if (pHead1->val <= pHead2->val)
+            if (pHead1->val < pHead2->val)
             {
                 cur->next = pHead1;
-                cur = cur->next;
                 pHead1 = pHead1->next;
             }
             else
             {
                 cur->next = pHead2;
-                cur = cur->next;
                 pHead2 = pHead2->next;
             }
+            cur = cur->next;
         }
-        if (pHead1 != nullptr)
+        if (pHead1)
             cur->next = pHead1;
-
-        if (pHead2 != nullptr)
+        if (pHead2)
             cur->next = pHead2;
-
         return head->next;
     }
 };
