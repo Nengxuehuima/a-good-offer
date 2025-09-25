@@ -8,42 +8,28 @@ struct ListNode {
     }
 };
 */
-class Solution {
-    public:
-        ListNode* EntryNodeOfLoop(ListNode* pHead) {
-            ListNode* slow = pHead, *fast = pHead;
-            while (fast && fast->next) {
-                slow = slow->next;
-                fast = fast->next->next;
-                if(slow == fast) break;
-            }
-            if(fast == nullptr || fast->next == nullptr) return nullptr;
-    
-            fast = pHead;
-            while (slow != fast) {
-                fast = fast->next;
-                slow = slow->next;
-            }
-            return fast;
-        }
-        class Solution {
+class Solution
+{
 public:
-    ListNode *detectCycle(ListNode *head) {
-        if(!head || !head->next||!head->next->next) return nullptr;
-        ListNode* slow = head;
-        ListNode* fast = head;
-        while(fast->next && fast->next->next)
+    ListNode *EntryNodeOfLoop(ListNode *pHead)
+    {
+        if (!pHead || !pHead->next || !pHead->next->next)
+            return nullptr;
+        ListNode *slow = pHead;
+        ListNode *fast = pHead;
+        while (fast && fast->next)
         {
             slow = slow->next;
             fast = fast->next->next;
-            if(slow == fast)
+            if (slow == fast)
             {
-                fast = head;
+                fast = pHead;
                 break;
             }
         }
-        if(fast != head) return nullptr;
-        while(slow != fast)
+        if (fast != pHead)
+            return nullptr;
+        while (slow != fast)
         {
             slow = slow->next;
             fast = fast->next;
@@ -51,4 +37,3 @@ public:
         return slow;
     }
 };
-    };
