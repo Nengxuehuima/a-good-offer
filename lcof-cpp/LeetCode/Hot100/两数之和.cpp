@@ -1,30 +1,34 @@
 #include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <unorder_map>
 
 using namespace std;
-
-vector<int> twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> map;  // 存储值和对应的索引
-    for (int i = 0; i < nums.size(); ++i) {
-        int complement = target - nums[i];
-        // 如果差值已在哈希表中，返回结果
-        if (map.find(complement) != map.end()) {
-            return {map[complement], i};
+vector<int> towSum(vector<int>& nums,int target)
+{
+    unorder_map<int,int> map;  //存储值和对应的索引
+    for(int i=0 ; i<nums.size() ; i++)
+        {
+           int complement = target-nums[i];
+            //如果差值已在哈希表，返回结果
+            if(map.find(complement) != map.end())
+            {
+                return {map[complement],i};
+            }
+            //否则，将当前元素添加到哈希表
+            map[nums[i]]=i;    //将当前元素 nums[i] 和它在数组中的索引 i 存入哈希表 map
         }
-        // 否则，将当前元素添加到哈希表
-        map[nums[i]] = i;
-    }
-    return {};  // 如果没有找到答案，返回空数组
+    return {};//如果没有找到答案，返回空数组
 }
 
-int main() {
-    vector<int> nums = {2, 7, 11, 15};
-    int target = 9;
-    vector<int> result = twoSum(nums, target);
-    for (int idx : result) {
-        cout << idx << " ";
-    }
+int main()
+{
+    vector<int> nums={2,7,11,15};
+    int target=9;
+    vector<int> result = twoSum(nums,target);
+    for(int idx : result)
+        {
+            cout << idx <<" ";
+        }
     return 0;
 }
 
