@@ -38,7 +38,7 @@ ListNode* partition(ListNode* head,int x)
       head = head->next;
     }
 
-  lessTail->next = greaterHead.next;//连接两部分
+  lessTail->next = greaterHead.next;//连接两部分  “. ”用于直接通过对象访问其成员   “->” 用于通过指针访问对象的成员
   greaterTail->next = nullptr;//防止形成循环链表
   return lessHead.next;
 }
