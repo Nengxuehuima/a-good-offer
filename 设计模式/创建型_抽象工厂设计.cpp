@@ -59,7 +59,7 @@ public:
 //抽象工厂接口
 class GUIFactory{
 public:
-  vietual Button* createButton() = 0;
+  virtual Button* createButton() = 0;
   virtual Textbox* createTextbox() = 0;
   virtual ~GUiFactory() = default;
 };
