@@ -35,11 +35,11 @@ public:
     return state;
   }
   
-  Menento* createMenento() const{
-    return new Menento(state);
+  Memento* createMemento() const{
+    return new Memento(state);
   }
   
-  void restoreMenento(const Memento* memento)
+  void restoreMemento(const Memento* memento)
   {
     state = memento->getState();
   }
